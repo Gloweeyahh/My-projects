@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #1c1c1c; /* Dark background for body */
+            color: #fff; /* Text color to contrast with dark background */
+            line-height: 1.6;
+        }
+
+        section {
+            padding: 5em 2em;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        /* Navbar */
+        header {
+            position: fixed;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            background-color: transparent;
+            transition: background-color 0.3s ease;
+        }
+
+        header.scrolled {
+            background-color: rgba(0, 0, 0, 0.9);
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: right;
+            list-style: none;
+            padding: 1em 0;
+      
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: orange; /* Orange accent for links */
+            font-weight: bold;
+            margin: 20px;
+            font-size: larger;
+        }
+
+        nav ul li a:hover {
+            color: #ff7b00; /* Slightly brighter orange on hover */
+        }
+
+        /* Hero Section */
+        .hero-section {
+            background: url('your-image.jpg') no-repeat center center/cover;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background-color: #000; /* Darker black background */
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+            margin: 50px;
+            color: white;
+        }
+
+        .btn {
+            margin-top: 70px;
+            padding: 25px 30px;
+            background: linear-gradient(45deg, orange, #ff7b00);
+            color: white;
+            border-radius: 30px;
+            text-transform: uppercase;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: linear-gradient(45deg, #ff7b00, orange);
+        }
+
+        /* Picture Section */
+        .about-me-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #2b2b2b;
+            flex-wrap: wrap;
+            padding: 3em 1em;
+        }
+
+        .profile-picture {
+            border-radius: 50%;
+            width: 180px; /* Reduced size for better mobile appearance */
+            height: 180px;
+            object-fit: cover;
+            border: 5px solid orange;
+            margin-bottom: 2em;
+        }
+
+        .about-me-text {
+            max-width: 600px;
+            text-align: center;
+        }
+
+        .about-me-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1em;
+            color: orange;
+        }
+
+        .about-me-text p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Portfolio Section */
+        .portfolio-section {
+            background-color: #2b2b2b; /* Dark grey for background */
+            text-align: center;
+            width: 100%;
+        }
+
+        .portfolio-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5em;
+            color: #ff7b00; /* Orange accent for section title */
+        }
+
+
+
+        .portfolio-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5em;
+            justify-content: center;
+        }
+
+        .portfolio-link {
+            text-decoration: none;
+            width:max;
+            font-size: 1.5rem;
+            color: orange;
+            background-color: #333; /* Slightly lighter black for portfolio items */
+            padding: 1em 2em;
+            border-radius: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            background-color: #444;
+        }
+        .dwl-btn{
+            margin-top: 50px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+        
+        /* Skills Section */
+        
+        .skills-section {
+            background-color: #1c1c1c;
+            text-align: center;
+        }
+
+        .skill-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5em;
+        }
+
+        .skill p {
+            font-size: 1.2rem;
+            margin-bottom: 0.5em;
+            color: #ff7b00;
+        }
+
+        .progress-bar {
+            position: relative;
+            width: 100%;
+            height: 30px;
+            background-color: #333;
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .progress-bar::before {
+            content: '';
+            position: absolute;
+            height: 100%;
+            width: var(--progress);
+            background: linear-gradient(45deg, orange, #ff7b00);
+            transition: width 0.5s ease;
+        }
+
+        .progress-bar span {
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            transform: translateY(-50%);
+            color: white;
+            font-weight: bold;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background-color: #1c1c1c;
+            padding: 5em 2em;
+            color: white;
+        }
+
+        .contact-section h2 {
+            font-size: 2.5rem;
+            color: #ff7b00;
+            margin-bottom: 2em;
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5em;
+            margin-bottom: 2em;
+        }
+
+        .contact-info div {
+            background-color: #2b2b2b;
+            padding: 1.5em;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 1.2rem;
+            color: #ff7b00;
+        }
+
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1em;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            padding: 1em;
+            border: none;
+            border-radius: 5px;
+            background-color: #333; /* Dark input fields */
+            color: white;
+            width: 100%;
+        }
+
+        .contact-form input::placeholder,
+        .contact-form textarea::placeholder {
+            color: #999; /* Lighter grey for placeholder text */
+        }
+
+        .contact-form textarea {
+            height: 150px;
+        }
+
+        .btn-contact {
+            background: linear-gradient(45deg, orange, #ff7b00);
+            color: white;
+            border: none;
+            padding: 1em 2em;
+            border-radius: 30px;
+            cursor: pointer;
+            text-transform: uppercase;
+        }
+
+        .btn-contact:hover {
+            background: linear-gradient(45deg, #ff7b00, orange);
+        }
+
+      
+        @media (max-width: 728px) {
+            .portfolio-links {
+               flex-direction: column;
+            }
+
+            .about-me-section {
+                flex-direction: column;
+            }
+            .hero-content h1{
+                font-size: 40px;
+            }
+
+            nav ul {
+                justify-content: center;
+                font-size: 15px;
+            }
+        }
+        @media (max-width: 480px) {
+            .about-me-section {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .profile-picture {
+                width: 120px; /* Reduced size for better fit on smaller screens */
+                height: 120px;
+            }
+
+            .about-me-text {
+                max-width: 90%;
+            }
+
+            nav ul {
+                display: flex;
+               justify-content: space-around;
+                flex-wrap: wrap; /* Keep row-based layout, but allow wrapping on smaller screens */
+            }
+
+            nav ul li a {
+                display: flex;
+                margin: 10px;
+                font-size: medium;
+
+            }
+            .dwl-btn{
+                flex-direction: column;
+                overflow: hidden;
+            }
+
+            .hero-content h1 {
+                font-size: 40px;
+                margin: 15px;
+                margin: 40px;
+            }
+
+            .portfolio-links {
+                flex-direction: column; /* Stacks portfolio links on smaller devices */
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <section id="home" class="hero-section">
+        <div class="hero-content">
+            <h1>Creating Cutting-Edge Web Experiences</h1>
+            <a href="#portfolio" class="btn">View My Work</a>
+        </div>
+    </section>
+
+    <section id="about" class="about-me-section">
+        <img src="WhatsApp Image 2024-09-09 at 14.32.09_6e8ff91b.jpg" alt="Your Picture" class="profile-picture">
+        <div class="about-me-text">
+            <h2>About Me</h2>
+            <p>I'm a passionate front-end web developer with a knack for creating stunning and functional websites. With expertise in HTML, CSS and JavaScript, I craft seamless user experiences that are both visually appealing and highly interactive. Let's build something amazing together!</p>
+            </div>
+        </section>
+    
+       
+        <section id="portfolio" class="portfolio-section">
+            <h2>My Work</h2>
+            <div class="portfolio-links">
+                <a href="My Project.html" class="portfolio-link">Responsive Website</a>
+                <a href="ecommerce.html" class="portfolio-link">E-Commerce Website</a>
+                <a href="Loginbox.html" class="portfolio-link">Login Page</a>
+            </div>
+            <div class="dwl-btn">
+                <a href="your-resume.pdf" download class="btn" class="dwl">Download Resume</a>
+                <a href="your-certificate.pdf" download class="btn" class="dwl">Download Certificate</a>
+            </div>
+        </section>
+    
+       
+        <section id="skills" class="skills-section">
+            <h2>Skills</h2>
+            <div class="skill-bars">
+                <div class="skill">
+                    <p>HTML</p>
+                    <div class="progress-bar" style="--progress: 90%;"><span>90%</span></div>
+                </div>
+                <div class="skill">
+                    <p>CSS</p>
+                    <div class="progress-bar" style="--progress: 85%;"><span>85%</span></div>
+                </div>
+                <div class="skill">
+                    <p>Bootstrap</p>
+                    <div class="progress-bar" style="--progress: 80%;"><span>75%</span></div>
+                </div>
+                <div class="skill">
+                    <p>JavaScript</p>
+                    <div class="progress-bar" style="--progress: 80%;"><span>70%</span></div>
+                </div>
+            </div>
+        </section>
+    
+        <!-- Contact Section -->
+        <section id="contact" class="contact-section">
+            <h2>Contact Me</h2>
+            <div class="contact-info">
+                <div>
+                    <p>Email</p>
+                    <a href="mailto:glowemeka@gmail.com">glowemeka@gmail.com</a>
+                </div>
+                <div>
+                    <p>Phone</p>
+                    <a href="tel:+2347036630817">+2347036630817</a>
+                </div>
+                <div>
+                    <p>Location</p>
+                    <p>Aso Estate, Sabon Lugbe Airport Road, FCT Abuja, Nigeria</p>
+                </div>
+            </div>
+            <form class="contact-form" id="contactForm">
+                <h3>Ask a question:</h3>
+                <input type="text" id="name" placeholder="Your Name">
+                <input type="email" id="email" placeholder="Your Email">
+                <textarea id="message" placeholder="Your Message"></textarea>
+                <button type="submit" class="btn-contact">Send Message</button>
+            </form>
+        </section>
+    
+     
+        <script>
+            
+            const portfolioLinks = document.querySelectorAll('.portfolio-link');
+            portfolioLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('GET', this.getAttribute('href'), true);
+                    xhr.onreadystatechange = function() {
+                        if (xhr.readyState == 4 && xhr.status == 200) {
+                            document.body.innerHTML = xhr.responseText;
+                        }
+                    };
+                    xhr.send();
+                });
+            });
+    
+            
+         
+            
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                const name = document.getElementById('name').value;
+                const email = document.getElementById('email').value;
+                const message = document.getElementById('message').value;
+    
+                const xhr = new XMLHttpRequest();
+                xhr.open('POST', 'contact.php', true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.onreadystatechange = function() {
+                    if (xhr.readyState == 4 && xhr.status == 200) {
+                        alert('Message sent successfully!');
+                    }
+                };
+                xhr.send('name=' + encodeURIComponent(name) + '&email=' + encodeURIComponent(email) + '&message=' + encodeURIComponent(message));
+            });
+    
+            
+            window.addEventListener('scroll', () => {
+                const header = document.querySelector('header');
+                header.classList.toggle('scrolled', window.scrollY > 0);
+            });
+            
+        </script>
+    
+    </body>
+    </html>
+    

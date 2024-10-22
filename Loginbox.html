@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            background-color: rgb(237, 240, 243);
+            font-family: Arial, Helvetica, sans-serif;
+            align-content: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .formbox {
+            width: 300px;
+            box-shadow: 50px;
+            padding: 20px;
+            background-color: white;
+            margin: 20px auto;
+        }
+
+        .formbox h2 {
+            text-align: left;
+            color: black;
+        }
+
+        .inputbox input[type="text"],
+        .inputbox input[type="password"],
+        .inputbox input[type="email"] {
+            text-align: left;
+            border: 2px solid rgb(239, 239, 239);
+            border-radius: 5px;
+            padding: 10px;
+            width: 95%;
+            margin: 10px 0px;
+        }
+
+        .register-button {
+            text-align: center;
+            border-radius: 5px;
+            background-color: rgb(4, 164, 4);
+            color: white;
+            padding: 10px;
+            width: 96%;
+            cursor: pointer;
+            margin: 10px 0px;
+            font-size: small;
+        }
+
+        .register-button:hover {
+            background-color: green;
+        }
+
+        .p {
+            text-align: center;
+            color: rgb(38, 149, 38);
+            font-size: small;
+        }
+
+        footer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background-color: #f2f2f7; 
+            padding: 0; 
+        }
+
+        .signup {
+            text-align: center;
+            padding: 10px 20px;
+            color: black;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            background-color: white;
+            width: 300px;
+            font-size: small;
+        }
+
+        .social-buttons button {
+            border-color: rgb(1, 115, 245);
+            border-radius: 5px;
+            background-color: white;
+            padding: 15px 10px;
+            cursor: pointer;
+            margin: 3px;
+            width: 100%;
+            color: rgb(1, 115, 245);
+            font-size: 15px;
+        }
+
+        .social-buttons {
+            display: flex;
+        }
+
+        .message {
+            text-align: left;
+            margin-top: 10px;
+            font-size: small;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            background-color: #fdd;
+        }
+
+        .success {
+            color: green;
+            background-color: #dfd;
+        }
+
+        #resultHeading {
+            font-size: large;
+            color: black;
+            margin-bottom: 10px;
+        }
+
+        #ajaxContent {
+            margin-top: 20px;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <!-- Page Content -->
+    <div class="formbox">
+        <h2>Registration Form</h2>
+        <div class="inputbox">
+            <input id="username" type="text" placeholder="Username">
+            <input id="email" type="email" placeholder="Email">
+            <input id="password" type="password" placeholder="Password">
+        </div>
+
+        <div id="registerButton" class="register-button" onclick="register()">
+            Register
+        </div>
+
+        <div id="resultHeading"></div>
+        <div id="message" class="message"></div>
+
+        <div class="p">
+            <p>
+                I am an <a href="artisan.html" class="ajax-link">ARTISAN</a>
+            </p>
+        </div>
+    </div>
+   
+    <footer>
+        <div class="signup">
+            <p>Sign up with</p>
+            <div class="social-buttons">
+                <button>Google
+                    <br>
+                    <i class="fa-brands fa-google"></i>
+                </button>
+                <button>Facebook
+                    <br>
+                    <i class="fa-brands fa-facebook"></i>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Container for AJAX-loaded content -->
+    <div id="ajaxContent">
+        <!-- AJAX-loaded content will be displayed here -->
+    </div>
+
+    <script>
+        // Registration form validation and display result
+        function register() {
+            var username = document.getElementById("username").value.trim();
+            var email = document.getElementById("email").value.trim();
+            var password = document.getElementById("password").value.trim();
+        
+            var messageElement = document.getElementById("message");
+            var resultHeading = document.getElementById("resultHeading");
+
+            messageElement.innerHTML = "";
+            resultHeading.innerHTML = "";
+
+            var missingFields = [];
+            if (username === "") missingFields.push("Username");
+            if (email === "") missingFields.push("Email");
+            if (password === "") missingFields.push("Password");
+
+            if (missingFields.length > 0) {
+                resultHeading.innerHTML = "Error:";
+                messageElement.innerHTML = `Please fill in the following fields: ${missingFields.join(', ')}`;
+                messageElement.className = "message error";
+            } else {
+                resultHeading.innerHTML = "Success:";
+                messageElement.innerHTML = `Username: ${username}, Email: ${email}, Password: ${password}`;
+                messageElement.className = "message success";
+            }
+        }
+
+        // Function to load new content via AJAX without refreshing the page
+        function loadPage(url) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    document.open();
+                    document.write(xhr.responseText);
+                    document.close();
+                } else {
+                    console.error('Error loading content');
+                }
+            };
+
+            xhr.onerror = function() {
+                console.error('AJAX request failed');
+            };
+
+            xhr.send();
+        }
+
+        // Attach event listeners to links with the class "ajax-link"
+        document.addEventListener("DOMContentLoaded", function() {
+            const ajaxLinks = document.querySelectorAll(".ajax-link");
+            ajaxLinks.forEach(function(link) {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    const url = link.getAttribute("href") || link.getAttribute("data-url");
+                    loadPage(url); // Use the AJAX function to load new content
+                });
+            });
+        });
+    </script>
+</body>
+</html>

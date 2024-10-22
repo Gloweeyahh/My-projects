@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+   
+    <h2>Exercise 1</h2>
+    <div id="show"></div>
+    <div id="variables"></div>
+
+    <h2>Exercise 2</h2>
+    <div id="output"></div>
+
+    <div id="courses"></div>
+    <div id="grades"></div>
+
+    <div id="student"></div>
+
+    <div id="exams"></div>
+
+    <h2>Exercise 3</h2>
+
+    <div id="operators"></div>
+
+    <h2>Exercise 4</h2>
+
+    <div id="tttt"> I love Javascript</div>
+
+
+    <input id="content" type="text" placeholder="Input Text">
+    <div id="result"></div>
+    <div id="text1"> </div>
+
+    <input id="Output" type="number" placeholder="Month Number">
+    <div class="result1"></div>
+
+    <script>
+
+        //Exercise 1
+        // 1. Write out the text "Javascript is Awesome" using the four output methods
+        //Console.log
+        console.log('Javascript is Awesome');
+        
+        // Alert
+        alert('Javascript is Awesome');
+
+        //GetElementbyId
+        document.getElementById('show').innerHTML = 'JavaScript is Awesome';
+
+        // Document.write
+        document.write('Javascript is Awesome')
+
+
+
+
+        //2. Create four variables of different values and write out their values:
+        var name = 'Gloria';
+        let age = 22;
+        const country = 'Nigeria';
+        let isStudent = false;
+
+        document.getElementById('variables').innerHTML = `
+            Name: ${name}<br>
+            Age: ${age}<br>
+            Country: ${country}<br>
+            Is Student: ${isStudent}
+        `;
+
+        //Exercise 2
+       // 1. Create variables of different data types 
+       let string = "Hello";
+        let number = 42;
+        let married = true;
+        let person = { name: 'Gloria', lastname: 'Emeka', age: 22 };
+        let objects = ['ring', 'table', 'cup'];
+
+        document.getElementById('output').innerHTML = `
+            ${string}<br>
+            ${number}<br>
+            ${married}<br>
+            ${person.name}<br>
+            ${person.lastname}<br>
+            ${age}<br>
+            ${objects[0]}, ${objects[1]}, ${objects[2]}
+        `;
+        
+        //2. create a list of courses - HTML, CSS,Javascript, Python
+        let courses = ["HTML", "CSS", "JavaScript", "Python"];
+            
+        document.getElementById('courses').innerHTML = `
+            <br>
+            Courses- ${courses[0]} <br>
+             -${courses[1]}<br>
+             -${courses[2]}<br>
+             -${courses[3]}
+
+        `;
+
+
+        //3. Create a list of grades - A,B,C,D
+        let grades = ["A", "B", "C", "D"];
+
+        document.getElementById('grades').innerHTML = `
+            <br>
+            Grades- ${grades[0]} <br>
+             -${grades[1]}<br>
+             -${grades[2]}<br>
+             -${grades[3]}
+        `;
+
+        //4. Store these values in a single variable and use it to create a UI component
+        /* a. name - solomon
+            b. favoriteColors - red,white
+            c. bestMeal  - 'Fried Rice'
+            d. courses - Python, javascript
+            e. age - 23
+            f. email = solomon@mail.com
+            h. phone = 08074810067 
+        */
+       
+
+        let student = {
+            name: 'Solomon',
+            favoriteColors: ['red', 'white'],
+            bestMeal: 'Fried Rice',
+            courses: ['Python', 'JavaScript'],
+            age: 23,
+            email: 'solomon@mail.com',
+            phone: '08074810067'
+        };
+
+            
+        document.getElementById('student').innerHTML = `
+            <br>
+            Name: ${student.name}<br>
+            Favorite Colors: ${student.favoriteColors[0]}, ${student.favoriteColors[1]}<br>
+            Best Meal: ${student.bestMeal}<br>
+            Courses: ${student.courses[0]}, ${student.courses[1]}<br>
+            Age: ${student.age}<br>
+            Email: ${student.email}<br>
+            Phone: ${student.phone}
+        `;
+
+        // 5. Structure this data using one variable
+        /* Exams = Class1: Q1. What is a computer?
+                            Q2. What is computer programming?
+                            Q3. List three programming languages you know
+                    Class2: Q1. What is is network?
+                            Q2. what are the types of network?
+                            Q3. State uses of network
+                    class3. Q1. What is web design
+                            Q2. list examples of web technologies in web design
+                            Q3. What is the importance of web design
+        */
+
+        let Exams = {
+            Class1: {
+                Q1: 'What is a computer?',
+                Q2: 'What is computer programming?',
+                Q3: 'List three programming languages you know'
+            },
+            Class2: {
+                Q1: 'What is a network?',
+                Q2: 'What are the types of network?',
+                Q3: 'State uses of network'
+            },
+            Class3: {
+                Q1: 'What is web design?',
+                Q2: 'List examples of web technologies in web design',
+                Q3: 'What is the importance of web design?'
+            }
+        };
+
+        document.getElementById('exams').innerHTML = `
+            <br>
+            Class 1 Questions:<br>
+            1. ${Exams.Class1.Q1}<br>
+            2. ${Exams.Class1.Q2}<br>
+            3. ${Exams.Class1.Q3}<br><br>
+            Class 2 Questions:<br>
+            1. ${Exams.Class2.Q1}<br>
+            2. ${Exams.Class2.Q2}<br>
+            3. ${Exams.Class2.Q3}<br><br>
+            Class 3 Questions:<br>
+            1. ${Exams.Class3.Q1}<br>
+            2. ${Exams.Class3.Q2}<br>
+            3. ${Exams.Class3.Q3}
+        `;
+
+        //Exercise 3
+        /*
+            1. Create a variable called `a` and `b` assign them values 10 and 20
+            a. What is a = a //? 
+            b. What is a+=b; //?
+            c. What is a-=b;
+            d. What is a==b; ///
+            d. What is a===b; ///
+            e. What is a>b; ///
+        */
+
+        let a = 10;
+        a = a
+        let b = 20;
+
+        a = a;
+        let add = (a += b);
+        let minus = (a -= b);
+        let bool1 = (a == b);
+        let bool2 = (a === b);
+        let bool3 = (a > b);
+
+        document.getElementById('operators').innerHTML = `
+            a: ${a}<br>
+            b: ${b}<br>
+            a += b: ${add}<br>
+            a -= b: ${minus}<br>
+            a == b: ${bool1}<br>
+            a === b: ${bool2}<br>
+            a > b: ${bool3}
+        `;
+
+        //Exercise 4
+        //1. Create a program  that takes an HTML element and changes its content 
+      
+        document.querySelector('#tttt').innerHTML='Hi, Javascript is awesome'
+        
+       
+       //4. Create a program that takes a value from an input element and returns the value in another text element
+       function returnInputValue(content, result) {
+            let inputValue = document.getElementById(content).value;
+            document.getElementById(result).textContent = inputValue;
+        }
+
+        document.getElementById('content').addEventListener('input', function() {
+            returnInputValue('content', 'result');
+        });
+        // create a program that takes a month number and returns  month string 
+        function returnMonth(x){
+            let str = ' , January, February, March, April, May, June, July, August, September, October, November, December'
+            let months = str.split(',')
+            return months[x];
+            if(x<1 || x>12){
+            return ('Invalid Month number ')
+            }else{
+            return months[x];
+            }
+        }
+    
+        function returnInputValue(Output, result1) {
+            let inputValue = document.getElementById(Output).value;
+            document.getElementById(resul1t).returnMonth(x) = inputValue;
+        }
+        document.getElementById('Output').addEventListener('input', function() {
+            returnInputValue('Output', 'result1');
+        })
+        
+    </script>
+</body>
+
+</html>

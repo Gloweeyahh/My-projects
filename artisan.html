@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            background-color: #f2f2f7;
+            font-family: Arial, sans-serif;
+        }
+        
+        .login-box {
+            width: 300px;
+            padding: 5px 20px 30px;
+            border-top: 30px solid #4CAF50;
+            border-bottom: 10px solid #4CAF50;
+            border-left: 2px solid #4CAF50;
+            border-right: 2px solid #4CAF50;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+        
+        .login-box h2 {
+            text-align: left;
+            margin-bottom: 0px;
+            color: #000;
+        }
+        
+        .input-container input[type="text"] {
+            width: 80%;
+            padding: 15px;
+            margin-bottom: 0px;
+            border: 2px solid #4CAF50;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .input-container input[type="password"] {
+            width: 80%;
+            padding: 15px;
+            margin-top: 0px;
+            margin-bottom: 15px;
+            border: 2px solid #4CAF50;
+            border-radius: 20px;
+            text-align: center;
+        }
+        
+        .input-container input[type="text"]:focus, .input-container input[type="password"]:focus {
+            border-color: #3e8e41;
+        }
+        
+        .login-button {
+            width: 90%;
+            padding: 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        
+        .login-button:hover {
+            background-color: #3e8e41;
+        }
+        
+        .sign-up {
+            margin-top: 10px;
+            text-align: left;
+        }
+        
+        .sign-up button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .message {
+            text-align: left;
+            margin-top: 10px;
+            font-size: small;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .error {
+            color: red;
+            background-color: #fdd;
+        }
+
+        .success {
+            color: green;
+            background-color: #dfd;
+        }
+        
+        #resultHeading {
+            font-size: large;
+            color: black;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <form action="" method="post">
+        <div class="login-box">
+            <h2>Artisan Login</h2>
+            <div class="input-container">
+                <input id="username" type="text" placeholder="Username" name="username" />
+            </div>
+            <div class="input-container">
+                <input id="password" type="password" placeholder="Password" name="password"/>
+            </div>
+            <button id="loginBtn" class="login-button" onclick="Login()" type="button">Login</button>
+            <div class="sign-up">
+                Don't have an account? <a href="Loginbox.html">
+                    <button>Sign Up</button>
+                </a>
+            </div>
+            <div id="resultHeading"></div> 
+            <div id="message" class="message"></div> 
+        </div>
+    </form>
+    
+    <script>
+       
+       function Login() {
+            var username = document.getElementById("username").value.trim();
+            var password = document.getElementById("password").value.trim();
+
+            var message = document.getElementById("message");
+            var resultHeading = document.getElementById("resultHeading");
+
+            message.innerHTML = "";
+            resultHeading.innerHTML = "";
+
+            var missingFields = [];
+            if (username === "") missingFields.push("Username");
+            if (password === "") missingFields.push("Password");
+
+            if (missingFields.length > 0) {
+                resultHeading.innerHTML = "Error!";
+                message.innerHTML = `Please fill in the following fields: ${missingFields.join(', ')}`;
+                message.className = "message error";
+            } else {
+                resultHeading.innerHTML = "Success!";
+                message.innerHTML = `Username: ${username}, Password: ${password}`;
+                message.className = "message success";
+                newuserlogin={
+                    user:username,
+                    pass:password
+                }
+            }
+        }
+        
+    </script>
+</body>
+</html>
