@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Project Showcase</title>
+  <style>
+    /* General Styling */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: #678a8a; /* Very dark greenish-black */
+      color: #d4d4d4; /* Soft light grey for text */
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    header {
+      text-align: center;
+      padding: 1rem;
+      background-color: #001010; /* Very dark greenish-black */
+      color: #006644; /* Dark green accent */
+      position: relative;
+      z-index: 2;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    .h1 {
+      font-size: 1rem;
+      text-align: left;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.15rem;
+      font-weight: bolder;
+      color: #038f60; /* Dark green accent */
+      animation: slideIn 1.5s ease-out forwards;
+    }
+    h1 {
+      font-size: 40px;
+      margin: 0;
+      text-transform: uppercase;
+      letter-spacing: 0.15rem;
+      color: #001010; /* Very dark greenish-black */
+      font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+      animation: slideIn 1.5s ease-out forwards;
+    }
+
+    /* Carousel Styling */
+    .carousel {
+      width: 100%;
+      overflow: hidden;
+      margin-top: 2rem;
+    }
+
+    .carousel-track-container {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .carousel-track {
+      display: flex;
+      transition: transform 0.6s ease-in-out;
+    }
+
+    .card {
+      min-width: 80%;
+      background-color: #001010; /* Very dark greenish-black */
+      border-radius: 10px;
+      margin: 20% 10%;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 2; /* Ensure it's above the canvas */
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 20px;
+      color: #d4d4d4;
+      font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+      text-align: left;
+      font-weight: 500;
+
+    }
+
+    h4{
+      color: #d4d4d4;
+      font-size: 20px;
+    }
+
+    .nav {
+      justify-content: space-between;
+    }
+  
+
+    .card:hover {
+      transform: scale(1.03);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    .card-img {
+      height: 250px;
+      background-size: cover;
+      background-position: center;
+      filter: grayscale(100%);
+      transition: filter 0.4s ease;
+    }
+
+    .card:hover .card-img {
+      filter: grayscale(0%);
+    }
+
+    .card-content {
+      padding: 2rem;
+      color: #d4d4d4;
+    }
+
+    h3 {
+      margin: 0 0 1.2rem;
+      color: #038f60; /* Dark green accent */
+      font-size: 1.75rem;
+      text-decoration: none;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #d4d4d4;
+    }
+
+    /* Footer Styling */
+    footer {
+      background-color: #001010; /* Very dark greenish-black */
+      color: #038f60; /* Dark green accent */
+      padding: 2rem 0;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+
+    .footer-container {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .social-icons {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+    }
+
+    .social-icons a {
+      display: inline-block;
+      margin: 0 10px;
+      font-size: 24px;
+      color: #038f60; /* Dark green accent */
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+
+    .social-icons a:hover {
+      color: #d4d4d4; /* Light grey on hover */
+    }
+
+    /* Background Animation */
+    #bgCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Lower than other content */
+    }
+
+    .webgl-section {
+              height: 100%;
+              position: relative;
+              overflow: hidden;
+          }
+
+
+          #webgl-canvas {
+              display: block;
+              width: 100%;
+              height: 80vh;
+          }
+
+          .intro-text {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              text-align: cleft;
+              color: var(--text-color);
+              z-index: 5;
+              font-size: 2rem;
+              background: rgba(0, 0, 0, 0.5);
+              padding: 40px;
+              border-radius: 10px;
+              width: 70%;
+              height: 50vh;
+          }
+
+          .cta-button {
+              display: inline-block;
+              padding: 10px 20px;
+              font-size: large;
+              text-align: center;
+              font-weight: bold;
+              background-color: var(--primary-color);
+              color: #000;
+              text-decoration: none;
+              border-radius: 5px;
+              transition: background-color 0.3s;
+          }
+
+          .cta-button:hover {
+              background-color: var(--text-color);
+          }
+
+    /* Keyframe Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(-100%); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    @media ( max-width: 750px) {
+      .card {
+        margin: 40px;
+      }
+      #webgl-canvas {
+              display: block;
+              width: 100%;
+              height: 100vh;
+          }
+
+          .intro-text {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              text-align: cleft;
+              color: var(--text-color);
+              z-index: 5;
+              font-size: 2rem;
+              background: rgba(0, 0, 0, 0.5);
+              padding: 40px;
+              border-radius: 10px;
+              width: 70%;
+              height: 80vh;
+          }
+          .card-link {
+            text-transform: none;
+            text-decoration: none;
+          }
+          .card {
+      min-width: 80%;
+      background-color: #001010; /* Very dark greenish-black */
+      border-radius: 10px;
+      margin: 20% 10%;
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      position: relative;
+      z-index: 2; /* Ensure it's above the canvas */
+    }
+    }
+    @media (max-width: 480px) {
+      .card {
+        margin: 40px;
+      }
+      #webgl-canvas {
+              display: block;
+              width: 100%;
+              height: 120vh;
+          }
+
+          .intro-text {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              text-align: cleft;
+              color: var(--text-color);
+              z-index: 5;
+              font-size: 2rem;
+              background: rgba(0, 0, 0, 0.5);
+              padding: 40px;
+              border-radius: 10px;
+              width: 70%;
+              height: 100vh;
+          }
+    }
+  </style>
+
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <header>
+    <div class= h1>gloria</div>
+  </header>
+
+  <section id="home" class="webgl-section">
+    <canvas id="webgl-canvas"></canvas>
+    <div class="intro-text">
+        <h1>Welcome to my project showcase.</h1>
+        <h2> 
+          This showcase features a curated collection of my web development projects, highlighting expertise in HTML, CSS, JavaScript, and responsive design. From dynamic interfaces to sleek animations, each project reflects a blend of creativity and technical proficiency. Explore solutions that prioritize user experience, performance, and modern design trends, offering a glimpse of what I can bring to your next project.
+        </h2>
+    </div>
+</section>
+
+
+  <!-- Carousel Section -->
+  <a href="#projects" class="cta-button"> <h1>Explore My Work</h1></a>
+  <section id="projects" class="projects">
+    <div class="carousel">
+      <div class="carousel-track-container">
+        <div class="carousel-track">
+          <div class="card">
+            <div class="card-img" style="background-image: url('files/ecommerce.png');"></div>
+            <div class="card-content">
+              <a href="ecommerce.html" class="card-link"><h3>Project One</h3></a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-img" style="background-image: url('files/Shopping.png');"></div>
+            <div class="card-content">
+              <a href="shopping.html" class="card-link" ><h3>Project Two</h3></a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-img" style="background-image: url('files/login.png');"></div>
+            <div class="card-content">
+              <a href="Loginbox.html" class="card-link><h3>Project Three</h3></a>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-img" style="background-image: url('files/login.png');"></div>
+            <div class="card-content">
+              <h3>Project Three</h3>
+              <p>Interactive features built with advanced JavaScript techniques.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-container">
+      <div class="social-icons">
+        <a href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+        <a href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
+        <a href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+        <a href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+      </div>
+    </div>
+    <p>&copy; 2024 Project Showcase | Crafted by Me</p>
+  </footer>
+
+  <!-- Background Animation -->
+  <canvas id="bgCanvas"></canvas>
+
+
+  <section>
+
+  </section>
+  <script>
+    // Background Animation
+    const canvas = document.getElementById('bgCanvas');
+    const ctx = canvas.getContext('2d');
+    let particlesArray = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor(x, y, size, speedX, speedY, color) {
+        this.x = x;
+        this.y = y;
+        this.size = size;
+        this.speedX = speedX;
+        this.speedY = speedY;
+        this.color = color;
+      }
+
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.size > 0.2) this.size -= 0.1;
+
+        // Reset particle when it goes off screen
+        if (this.x > canvas.width || this.x < 0 || this.y > canvas.height || this.y < 0) {
+          this.resetParticle();
+        }
+      }
+
+      resetParticle() {
+        this.x = Math.random() * canvas.width;
+        this.y = Math.random() * canvas.height;
+        this.size = Math.random() * 5 + 1;
+        this.speedX = Math.random() * 2 - 1;
+        this.speedY = Math.random() * 2 - 1;
+      }
+
+      draw() {
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fillStyle = this.color;
+        ctx.fill();
+      }
+    }
+
+    function createParticles() {
+      for (let i = 0; i < 100; i++) {
+        const x = Math.random() * canvas.width;
+        const y = Math.random() * canvas.height;
+        const size = Math.random() * 5 + 1;
+        const speedX = Math.random() * 2 - 1;
+        const speedY = Math.random() * 2 - 1;
+        const color = '#00ffcc'; // Neon teal
+        particlesArray.push(new Particle(x, y, size, speedX, speedY, color));
+      }
+    }
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particlesArray.forEach(particle => {
+        particle.update();
+        particle.draw();
+      });
+      requestAnimationFrame(animateParticles);
+    }
+
+    createParticles();
+    animateParticles();
+
+    // Carousel Sliding Functionality
+    const track = document.querySelector('.carousel-track');
+    const slides = Array.from(track.children);
+    let currentIndex = 0;
+    const slideInterval = 10000; // 10 seconds
+
+    function moveToNextSlide() {
+      currentIndex = (currentIndex + 1) % slides.length; // Cycle through slides
+      const amountToMove = -currentIndex * 100; // Move to next slide
+      track.style.transform = `translateX(${amountToMove}%)`;
+    }
+
+    setInterval(moveToNextSlide, slideInterval); // Auto-slide every 10 seconds
+  </script>
+</body>
+</html>
